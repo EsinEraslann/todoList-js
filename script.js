@@ -11,5 +11,24 @@ const displayCount = (taskCount) => {
 };
 
 const addTask = () => {
-    
-}
+    const taskName = newTaskInput.ariaValueMax.trim();
+    error.style.display = "none";
+    if (!taskname) {
+        setTimeout(() => {
+            error.style.display = "block";
+        }, 200);
+        return;
+    }
+
+    const task = `<div class="task">
+        <input type="checkbox" class="task-check">
+        <span class="taskname"> ${taskName} </span>
+        <button class="edit">
+        <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button class="delete">
+        <i class="fa-solid fa-trash"></i>
+        </button>
+        </div>`;
+
+};
