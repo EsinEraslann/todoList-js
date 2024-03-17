@@ -1,65 +1,112 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    background: rgb(192, 159, 159);
-}
-
-.app {
-    width: 40rem;
-    position: absolute;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 5rem;
+    background: linear-gradient(45deg,
+    var(--primary-color),
+    var(--secondary-color)
+    );
 }
 
 .container {
-    padding: 3rem;
-    background-color: #ffffff;
-    box-shadow: 0 1rem 2rem rgb(0, 0, 0, 0.5);
-    border-radius: 1rem;
+    width: 500px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
-#wrapper {
-    position: relative;
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.input-container {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    margin-bottom: 20px;
 }
 
-#wrapper input {
-    width: 100%;
-    background-color: transparent;
-    color: #000;
-    border: none;
-    outline: 0;
-    border-bottom: 2px solid rgb(166, 165, 165);
-    padding: 1rem;
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
 }
 
-#wrapper button {
-    position: relative;
-    border-radius: 1rem;
-    font-weight: 500;
-    background-color: blue;
+button {
+    padding: 10px;
+    background-color: var(--primary-color);
     border: none;
-    outline: none;
     color: #fff;
     cursor: pointer;
-    width: 10rem;
+    transition: 300ms all;
 }
 
-#error {
-    text-align: center;
-    background-color: #fff;
-    color: orange;
-    margin-top: 2rem;
-    padding: 1rem 0;
-    border-radius: 1rem;
-    display: none;
+button:hover {
+    background-color: var(--secondary-color);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    animation: fadeIn 0.5s ease;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+span{
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.completed span{
+    text-decoration: line-through;
+    color: #999;
+}
+
+.completed button{
+    color: #e74c3c;
+}
+
+@keyframes fadeIn {
+    from{
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeOut {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+        transform: translateY(-10px);
+    }
 }
