@@ -34,4 +34,73 @@ function toggleComplete(id) {
     todo.completed = !todo.completed; // true yu fale, false yi true yap
 
     localStorage.setItem("todos", JSON.stringify(savedTodos));
-    const todoElement = document.getElementBy
+    const todoElement = document.getElementById(id);
+    todoElement.classList.toggle("completed", todo.completed);
+}
+
+// görevi düzenlemek için
+/* function editTodo(id) {
+    const todo = savedTodos.find((todo) => todo.id === id);
+    const newText = prompt("Edit the task: ", todo.text);
+    if (newText !== null) {
+        todo.text = newText.trim();
+        localStorage.setItem("todos", JSON.stringify(savedTodos));
+        const todoElement = document.getElementById(id);
+        todoElement.querySelector("span").textContent = newText;
+    }
+} */
+
+function editTodo(id) {
+    const todo = savedTodos.find((todo) => todo.id === id);
+    let newText = prompt("Edit the task:", todo.text);
+
+    // Kullanıcı prompt'u iptal ederse veya boş bir metin girerse
+    while (newText === null || newText.trim() === "") {
+        alert("Task text cannot be empty!");
+        newText = prompt("Edit the task:", todo.text);
+    }
+
+    // Kullanıcı geçerli bir metin girdiğinde devam et
+    if (newText !== null) {
+        todo.text = newText.trim();
+        localStorage.setItem("todos", JSON.stringify(savedTodos));
+        const todoElement = document.getElementById(id);
+        todoElement.querySelector("span").textContent = newText;
+    }
+}
+
+// görevi listeden kaldırmak için
+function removeTodo(id) {
+    const todoElement = document.getElementById(id);
+    todoElement.style.animation = "fadeOut 0.3s ease";
+
+    setTimeout(() => {
+        savedTodos.splice(
+            savedTodos.findIndex((todo) => todo.id === id),
+            1
+        );
+        localStorage.setItem("todos", JSON.stringify(savedTodos));
+        todoElement.remove();
+    }, 300);
+}
+
+// listeye ekleme fonksiyonu
+function addTodoToList(todo) {
+    const li = document.createElement("li");
+    li.setAttribute("id", todo.id);
+    li.innerHTML = `
+        <span title="${todo.text}">${todo.text}</span>
+        <button onclick="toggleComplete(${todo.id})"><i class="fa-solid fa-check"></i></button>
+        <button onclick="editTodo(${todo.id})"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button onclick="removeTodo(${todo.id})"><i class="fa-solid fa-trash"></i></button>
+    `;
+    /* li.classList.toggle("completed", todo.completed); */
+    todoList.appendChild(li);
+}
+
+// Enter tuşuna basıldığında ekleme yapma
+todoInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        addTodo();
+    }
+});
